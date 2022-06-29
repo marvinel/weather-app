@@ -1,0 +1,35 @@
+.Details{
+    width: 60%;
+}
+.Future{
+    display: flex;
+    margin: 5px 5px 20px ;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.Future-detail{
+    width: 200px;
+    
+    background-color: #3b0f3b;
+    margin: 5px;
+    border-radius: 5px;
+}
+.Hightlights{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.Hightlight-item{
+    background-color: #3b0f3b;
+
+    width: 500px;
+    margin: 10px;
+}
+
+.Slider{
+    width: 50%;
+    margin: 0 auto;
+}
