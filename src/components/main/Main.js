@@ -1,27 +1,59 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Main.css';
+import 'antd/dist/antd.min.css';
 
-import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import MyLocationIcon from '@mui/icons-material/MyLocation';
 
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+
+import { Input} from 'antd';
+const { Search } = Input;
 function Main(props) {
-  const [city, setCity] = React.useState('Bogota');
-  const handleChange = (event) => {
-    setCity(event.target.value);
-  };
-  const round=(number)=>{
- 
-  return Math.round(number,1)
+
+  const onSearch = (value) =>{
+    console.log("buscar: " + value);
+  
+    props.func(value)
+  }
+
+  const round = (number) => {
+    return Math.round(number, 1)
   }
   return (
     <div className="Main">
-      <TextField fullWidth label="fullWidth" id="fullWidth"
-        value={city}
-        onChange={handleChange} />
-        <button onClick={()=>props.func(city)}>Buscar</button>
-      <h2>{props.clima.name}</h2>
-      <img src={`http://openweathermap.org/img/wn/${props.clima.weather[0].icon}@2x.png`} alt={props.clima.weather[0].main}></img>
-      <p>{round(props.clima.main.temp)}°C</p>
-      <p>{props.clima.weather[0].main}</p>
+
+      <div className='Search_Section'>
+        <div>
+        <Search
+          placeholder="Search for places"
+          allowClear
+          enterButton="Search"
+          size="large"
+          onSearch={onSearch}
+        />
+        </div>
+        <div>
+        <IconButton color='primary' onClick={props.location} aria-label="delete" size="large">
+          <MyLocationIcon fontSize="inherit" />
+        </IconButton>
+        </div>
+      </div>
+      <div>
+
+
+        <div className='Location'>
+
+          <p id="city"><LocationOnIcon fontSize="inherit" /> {props.clima.name} </p>
+
+        </div>
+
+        <img src={require(`../../assets/${props.clima.weather[0].icon}.png`)} alt={props.clima.weather[0].main}></img>
+
+        {// <img src={require(`../../assets/01d.png`)} alt={props.clima.weather[0].main}></img>
+        }<p className='Temp'>{round(props.clima.main.temp)}°C</p>
+        <p>{props.clima.weather[0].main}</p>
+      </div>
     </div>
   );
 }

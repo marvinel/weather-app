@@ -1,20 +1,32 @@
 .Details{
     width: 60%;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-direction: column;
 }
 .Future{
     display: flex;
     margin: 5px 5px 20px ;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
    
 }
 
 .Future-detail{
-    width: 200px;
+    width: 15%;
     
-    background-color: #3b0f3b;
+    background-color: #417b8b;
     margin: 5px;
     border-radius: 5px;
+}
+.Future-detail p{
+    font-size: 1.2rem;
+}
+.Future-detail img{
+    height: 100px;
+    
 }
 .Hightlights{
     display: flex;
@@ -23,13 +35,42 @@
 }
 
 .Hightlight-item{
-    background-color: #3b0f3b;
+    background-color: #417b8b;
 
-    width: 500px;
+    width: 40%;
     margin: 10px;
 }
 
 .Slider{
     width: 50%;
     margin: 0 auto;
+    
 }
+.Slider span{
+    color: white;
+}
+.temp_daily{
+    display: flex;
+    justify-content: space-around;
+}
+@media  (max-width: 1300px) {
+    .Future-detail p{
+        font-size: 1rem;
+    }
+  }
+
+  @media  (max-width: 1050px) {
+    .Future-detail{
+        width: 100px;
+        
+
+    }
+  }
+
+  @media  (max-width:637px) {
+    .Details{
+        width: 100%;
+        
+
+    }
+  }
