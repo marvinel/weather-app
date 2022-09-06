@@ -12,7 +12,7 @@ const { Search } = Input;
 function Main(props) {
 
   const onSearch = (value) =>{
-    console.log("buscar: " + value);
+   
   
     props.func(value)
   }

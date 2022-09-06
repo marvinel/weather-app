@@ -7,7 +7,7 @@ import './App.css';
 import Main from './components/main/Main';
 import Details from './components/details/Details';
 
-import { createTheme, styled, ThemeProvider, darken } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import PuffLoader from "react-spinners/PuffLoader";
 const theme = createTheme({
@@ -31,7 +31,7 @@ function App() {
   const CURRENT = "weather?";
   const FORECAST = "onecall?";
 
-  const CNT = 5;
+  
 
   const [clima, setClima] = useState({})
   const [daily, setDaily] = useState({})
@@ -47,8 +47,7 @@ function App() {
     if (searching) {
       axios.get(`${BASE_URL}${FORECAST}lat=${coord.lat}&lon=${coord.lon}&exclude=hourly,minutely&units=metric&APPID=${Api_key}`)
         .then(res => {
-          console.log("daily")
-          console.log(res.data)
+     
           setDaily(res.data)
         })
 
@@ -63,12 +62,12 @@ function App() {
         const watchID = navigator.geolocation.getCurrentPosition((position) => {
           var lat = position.coords.latitude;
           var lon = position.coords.longitude;
-          console.log(lat, lon)
+         
 
           axios.get(`${BASE_URL}${CURRENT}lat=${lat}&lon=${lon}&units=metric&APPID=${Api_key}`)
             .then(res => {
-              console.log("aca")
-              console.log(res.data)
+            
+             
               setClima(res.data)
               setLoading(false)
             })
@@ -82,7 +81,7 @@ function App() {
             })
         });
 
-       if(watchID == undefined){
+       if(watchID === undefined){
         search("london")
        }
 
@@ -106,7 +105,7 @@ function App() {
         setSearching(true)
         setCoord(res.data.coord)
         setClima(res.data)
-        console.log(res.data)
+       
 
       })
       .catch(err => {

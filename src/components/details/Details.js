@@ -1,28 +1,11 @@
 import './Details.css';
 import 'antd/dist/antd.min.css';
-import Slider from '@mui/material/Slider';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import { Progress } from 'antd';
 function Details(props) {
   var moment = require('moment'); // require
-  const marks = [
-    {
-      value: 0,
-      label: '0%',
-    },
 
-    {
-      value: 50,
-      label: '50%',
-    },
-    {
-      value: 100,
-      label: '100%',
-    },
-  ];
-  function valuetext(value) {
-    return `${value}%`;
-  }
+ 
   const formatdat = (date) => {
 
     return moment.unix(date).format("ddd, DD MMM")
