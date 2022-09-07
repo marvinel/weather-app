@@ -5,7 +5,7 @@ import { Progress } from 'antd';
 function Details(props) {
   var moment = require('moment'); // require
 
- 
+
   const formatdat = (date) => {
 
     return moment.unix(date).format("ddd, DD MMM")
@@ -40,32 +40,40 @@ function Details(props) {
           <p>Wind Status</p>
           <p>{props.clima.wind.speed}mph</p>
           <div style={{
-            margin:" 0 auto",
+            margin: " 5px auto",
             padding: "0",
-            transform:`rotate(${props.clima.wind.deg}deg)` ,
+            transform: `rotate(${props.clima.wind.deg}deg)`,
             background: "rgb(87 148 161)",
-            borderRadius:" 50%",
+            borderRadius: " 50%",
             width: "40px",
-            height:"40px"
-          }}><NavigationIcon fontSize="inherit" /></div>
-      </div>
-      <div className='Hightlight-item'>
-        <p>Humidity</p>
-        <p>{props.clima.main.humidity}%</p>
-        <div className='Slider'>
-          <Progress percent={props.clima.main.humidity} status="active" />
+            height: "40px",
+            position: "relative"
+          }}><NavigationIcon style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            margin: "-45% 0 0 -35%",
+            height: "80%",
+            width: "70%",
+          }} fontSize="inherit" /></div>
         </div>
+        <div className='Hightlight-item'>
+          <p>Humidity</p>
+          <p>{props.clima.main.humidity}%</p>
+          <div className='Slider'>
+            <Progress percent={props.clima.main.humidity} status="active" />
+          </div>
 
+        </div>
+        <div className='Hightlight-item'>
+          <p>Visibility</p>
+          <p>{props.clima.visibility} miles</p>
+        </div>
+        <div className='Hightlight-item'>
+          <p>Air Pressure</p>
+          <p>{props.clima.main.pressure} mb</p>
+        </div>
       </div>
-      <div className='Hightlight-item'>
-        <p>Visibility</p>
-        <p>{props.clima.visibility} miles</p>
-      </div>
-      <div className='Hightlight-item'>
-        <p>Air Pressure</p>
-        <p>{props.clima.main.pressure} mb</p>
-      </div>
-    </div>
     </div >
   );
 }

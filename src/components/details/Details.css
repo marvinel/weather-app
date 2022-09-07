@@ -1,5 +1,6 @@
 .Details{
     width: 60%;
+    
     display: flex;
     align-items: stretch;
     justify-content: center;
@@ -16,16 +17,21 @@
 
 .Future-detail{
     width: 15%;
-    
+    height: 180px;
     background-color: #417b8b;
     margin: 5px;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
 }
 .Future-detail p{
     font-size: 1.2rem;
 }
 .Future-detail img{
-    height: 100px;
+    width: 70%;
+    margin: 0 auto;
     
 }
 .Hightlights{
