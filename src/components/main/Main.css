@@ -17,14 +17,24 @@
 
 .Search_Section {
     width: 100%;
-    margin: 20px;
+    margin: 30px;
     display: flex;
     align-items: center;
     justify-content:space-evenly;
+    position: relative;
 }
 
 .Search_Section .button {
     margin: 10px !important;
+}
+
+.Spinnerr{
+    position: absolute;
+    
+   
+    border-radius: 50%;
+    bottom: -100%;
+    left: 50%;
 }
 
 .Location {

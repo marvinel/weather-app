@@ -7,37 +7,47 @@ import MyLocationIcon from '@mui/icons-material/MyLocation';
 
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
+import PulseLoader from "react-spinners/PulseLoader";
+
+
 import { Input} from 'antd';
 const { Search } = Input;
+
 function Main(props) {
 
   const onSearch = (value) =>{
    
-  
+    
     props.func(value)
   }
 
   const round = (number) => {
     return Math.round(number, 1)
   }
+
+ 
   return (
     <div className="Main">
 
       <div className='Search_Section'>
-        <div>
+        <div className='Search_Section_bar'>
         <Search
           placeholder="Search for places"
-          allowClear
+          
           enterButton="Search"
           size="large"
           onSearch={onSearch}
         />
+
         </div>
         <div>
         <IconButton color='primary' onClick={props.location} aria-label="delete" size="large">
           <MyLocationIcon fontSize="inherit" />
         </IconButton>
         </div>
+        <div className='Spinnerr'>
+        <PulseLoader color={'white'} loading={props.loading}  />
+          </div>
       </div>
       <div>
 

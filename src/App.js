@@ -10,6 +10,9 @@ import Details from './components/details/Details';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import PuffLoader from "react-spinners/PuffLoader";
+
+import Swal from 'sweetalert2'
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -40,15 +43,16 @@ function App() {
   const [searching, setSearching] = useState(false)
 
   const [loading, setLoading] = useState(true)
-
+  const[loading2, setLoading2] = useState(false)
 
   useEffect(() => {
-
+ 
     if (searching) {
       axios.get(`${BASE_URL}${FORECAST}lat=${coord.lat}&lon=${coord.lon}&exclude=hourly,minutely&units=metric&APPID=${Api_key}`)
         .then(res => {
      
           setDaily(res.data)
+          setLoading(false)
         })
 
 
@@ -99,17 +103,25 @@ function App() {
   }, [searching, coord])
 
   const search = (city) => {
-
+    setLoading2(true)
     axios.get(`${BASE_URL}${CURRENT}q=${city}&units=metric&appid=${Api_key}`)
       .then(res => {
         setSearching(true)
         setCoord(res.data.coord)
         setClima(res.data)
        
-
+        setLoading2(false)
       })
       .catch(err => {
         console.log(err.response.data.message)
+        
+        setLoading2(false)
+        Swal.fire({
+          title: 'Error!',
+          text: err.response.data.message,
+          icon: 'error',
+          confirmButtonText: 'Cool'
+        })
       })
 
    
@@ -133,7 +145,7 @@ function App() {
            
               {clima.main ?
              
-                <Main clima={clima} func={search} location={() => setSearching(false)} /> :  <div className="Main"><PuffLoader color={'white'} loading={loading} size={150} /></div>
+                <Main clima={clima} loading={loading2} func={search} location={() => setSearching(false)} /> :  <div className="Main"><PuffLoader color={'white'} loading={loading} size={150} /></div>
               }
            
 
