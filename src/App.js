@@ -45,8 +45,11 @@ function App() {
   const [loading, setLoading] = useState(true)
   const[loading2, setLoading2] = useState(false)
 
-  useEffect(() => {
- 
+
+
+ useEffect(() => {
+
+  
     if (searching) {
       axios.get(`${BASE_URL}${FORECAST}lat=${coord.lat}&lon=${coord.lon}&exclude=hourly,minutely&units=metric&APPID=${Api_key}`)
         .then(res => {
@@ -58,47 +61,57 @@ function App() {
 
     } else {
 
-      
+     
       if ('geolocation' in navigator) {
-
-       
-
-        const watchID = navigator.geolocation.getCurrentPosition((position) => {
-          var lat = position.coords.latitude;
-          var lon = position.coords.longitude;
+        const onUbicacionConcedida = ubicacion => {
          
+          var lat = ubicacion.coords.latitude;
+          var lon = ubicacion.coords.longitude;
+        
+
 
           axios.get(`${BASE_URL}${CURRENT}lat=${lat}&lon=${lon}&units=metric&APPID=${Api_key}`)
-            .then(res => {
-            
-             
-              setClima(res.data)
-              setLoading(false)
-            })
+          .then(res => {
+          
+           
+            setClima(res.data)
+            setLoading(false)
+          })
 
-          axios.get(`${BASE_URL}${FORECAST}lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&APPID=${Api_key}`)
-            .then(res => {
-              
-             
-              setDaily(res.data)
-              setLoading(false)
-            })
-        });
+        axios.get(`${BASE_URL}${FORECAST}lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&APPID=${Api_key}`)
+          .then(res => {
 
-       if(watchID === undefined){
-        search("london")
-       }
+            setDaily(res.data)
+            setLoading(false)
+          })
+        }
+        
+        const onErrorDeUbicacion = err => {
+          console.log("Error obteniendo ubicación: ", err);
+          search("london")
+        }
+      
+        const opcionesDeSolicitud = {
+          enableHighAccuracy: true, // Alta precisión
+          maximumAge: 0, // No queremos caché
+          timeout: 5000 // Esperar solo 5 segundos
+        };
+        // Solicitar
+        const watchID = navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud);
+       
+  
+      
+
+      
 
 
         navigator.geolocation.clearWatch(watchID);
       } else {
-       
+       console.error("Problemas para geolocalizacion");
        
       }
        
     }
-
-
 
   }, [searching, coord])
 
@@ -124,9 +137,10 @@ function App() {
         })
       })
 
-   
-
-
+  }
+  const locationsearch = () =>{
+    
+    setSearching(false)
   }
 
   if (!clima) {
@@ -145,7 +159,7 @@ function App() {
            
               {clima.main ?
              
-                <Main clima={clima} loading={loading2} func={search} location={() => setSearching(false)} /> :  <div className="Main"><PuffLoader color={'white'} loading={loading} size={150} /></div>
+                <Main clima={clima} loading={loading2} func={search} location={locationsearch} /> :  <div className="Main"><PuffLoader color={'white'} loading={loading} size={150} /></div>
               }
            
 
