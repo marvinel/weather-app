@@ -88,6 +88,12 @@ function App() {
         
         const onErrorDeUbicacion = err => {
           console.log("Error obteniendo ubicación: ", err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong! \n User denied Geolocation'
+            
+          })
           search("london")
         }
       
